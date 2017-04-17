@@ -8,4 +8,10 @@ Marketing Team
 
 
 
+  Development Team  
+
+  As a developer I want to be able to keep track of user input or votes and store that information for later analysis.  
+  As a developer I want to make sure the user has different choices from the previous iteration.  
+  As a developer I want to hide voting results until user has voted a number of times so to reduce influence in their choices.  
+  As a developer I want to limit each iteration of a vote to only 3 items so user isn't overwhelmed with choices.  
   
