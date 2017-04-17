@@ -8,3 +8,10 @@
 body{
   background-color: black;
 }
+
+.photo-box{
+  height: 25%;
+  width: 25%;
+  float: left;
+  padding: 20px;
+}
