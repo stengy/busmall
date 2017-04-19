@@ -2,9 +2,9 @@
 
 var app = document.getElementById('app');
 var clicksRemaining = 25;
-var photosOnSecondToLastScreen = [];
-var photosOnPreviousScreen = [];
-var photosOnScreen = [];
+var secondToLastPhotos = [];
+var previousPhotos = [];
+var displayedPhotos = [];
 
 var photos = [
   new Photo('bag head', 'bag.jpg'),
@@ -32,7 +32,7 @@ var photos = [
   new Photo('wine-glass', 'wine-glass.jpg'),
 ];
 
-renderPhotoChoises();
+renderPhotoChoices();
 
 
 
@@ -49,56 +49,56 @@ function getRandomIndex(list) {
 }
 
 // get three random photos
-function getThreeRandomPhotos(){
-  photos = photos.concat(photosOnSecondToLastScreen);
-  photosOnSecondToLastScreen = photosOnPreviousScreen;
-  photosOnPreviousScreen = photosOnScreen;
-  photosOnScreen = [];
+function generateRandomPhotos(){
+  photos = photos.concat(secondToLastPhotos);
+  secondToLastPhotos = previousPhotos;
+  previousPhotos = displayedPhotos;
+  displayedPhotos = [];
 
   // create a var nextPhoto to keep track of the next Photo we take out of photos
   // splice out an photo object (wich removes it from photos)
   var nextPhoto = photos.splice(getRandomIndex(photos), 1);
   // concat the array returned by splice onto photos onScreen
-  photosOnScreen = photosOnScreen.concat(nextPhoto);
+  displayedPhotos = displayedPhotos.concat(nextPhoto);
   // repeat two more times to get three images
   nextPhoto = photos.splice(getRandomIndex(photos), 1);
-  photosOnScreen = photosOnScreen.concat(nextPhoto);
+  displayedPhotos = displayedPhotos.concat(nextPhoto);
   nextPhoto = photos.splice(getRandomIndex(photos), 1);
-  photosOnScreen = photosOnScreen.concat(nextPhoto);
+  displayedPhotos = displayedPhotos.concat(nextPhoto);
 }
 
 function handlePhotoClick(event){
   var image = event.target;
-  var photosOnScreenIndex = image.getAttribute('photos-on-screen-index');
-  photosOnScreen[photosOnScreenIndex].clickCount++;
-  // console.log('photoClicked', photosOnScreen[photosOnScreenIndex]);
+  var displayedPhotosIndex = image.getAttribute('photos-on-screen-index');
+  displayedPhotos[displayedPhotosIndex].clickCount++;
+  // console.log('photoClicked', displayedPhotos[displayedPhotosIndex]);
 
   clicksRemaining--;
   // console.log('clicksRemaining', clicksRemaining);
   if (clicksRemaining > 0){
-    renderPhotoChoises();
+    renderPhotoChoices();
   } else {
     renderChart();
   }
 }
 
-function renderPhotoChoises(){
+function renderPhotoChoices(){
   // get three new photos
-  getThreeRandomPhotos();
+  generateRandomPhotos();
 
   // empty out the app div
   app.textContent = '';
 
   // re populate the app div
   var imageElement;
-  for(var i=0; i < photosOnScreen.length; i++){
+  for(var i=0; i < displayedPhotos.length; i++){
     // incrament
-    photosOnScreen[i].displayCount++;
+    displayedPhotos[i].displayCount++;
 
     // create the img element
     imageElement = document.createElement('img');
     // set its source
-    imageElement.src = photosOnScreen[i].src;
+    imageElement.src = displayedPhotos[i].src;
     // set an atribute for use later in the event handler
     // that tracks which photo object in photosOnScree to
     // incrament clicks on
@@ -112,10 +112,10 @@ function renderPhotoChoises(){
 
 function renderChart(){
   // refill photos array with the photo objects we took
-  // during getThreeRandomPhotos
-  photos = photos.concat(photosOnScreen);
-  photos = photos.concat(photosOnPreviousScreen);
-  photos = photos.concat(photosOnSecondToLastScreen);
+  // during generateRandomPhotos
+  photos = photos.concat(displayedPhotos);
+  photos = photos.concat(previousPhotos);
+  photos = photos.concat(secondToLastPhotos);
 
   // empty out the app div
   app.textContent = '';
