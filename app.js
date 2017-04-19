@@ -44,7 +44,32 @@ var firstImg = document.getElementById('firstImg');
 var secondImg = document.getElementById('secondImg');
 var thirdImg = document.getElementById('thirdImg');
 
-var clickTicker = 0;
+var clicksLeft = 25;
+
+firstImg.addEventListener('click', clickFirstImg);
+secondImg.addEventListener('click', clickSecondImg);
+thirdImg.addEventListener('click', clickThirdImg);
+
+
+
+function clickFirstImg() {
+  photos[firstRand].clickCount++;
+  generateRandomPhoto();
+  clicksLeft--;
+}
+
+function clickSecondImg(){
+  photos[secondRand].clickCount++;
+  generateRandomPhoto();
+  clicksLeft--;
+}
+
+function clickThirdImg(){
+  photos[thirdRand].clickCount++;
+  generateRandomPhoto();
+  clicksLeft--;
+}
+
 
 function generateRandomIndex() {
   var randomIndex = Math.floor(Math.random() * photos.length);
