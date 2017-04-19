@@ -1,42 +1,73 @@
 'use strict'
 
-console.log('lets goooo');
+//constructor
+
+function Photo(name, fileLocation) {
+  this.name = name;
+  this.fileLocation = fileLocation;
+  this.clickCount = 0;
+  this.displayCount = 0;
+
+}
+
+var photos = [
+  new Photo('bag', './imgs/bag.jpg'),
+  new Photo('banana', './imgs/banana.jpg'),
+  new Photo('bathroom', './imgs/bathroom.jpg'),
+  new Photo('boots', './imgs/boots.jpg'),
+  new Photo('breakfast', './imgs/breakfast.jpg'),
+  new Photo('bubblegum', './imgs/bubblegum.jpg'),
+  new Photo('chair', './imgs/chair.jpg'),
+  new Photo('cthulhu', './imgs/cthulhu.jpg'),
+  new Photo('dog-duck', './imgs/dog-duck.jpg'),
+  new Photo('dragon', './imgs/dragon.jpg'),
+  new Photo('pen', './imgs/pen.jpg'),
+  new Photo('pet-sweep', './imgs/pet-sweep.jpg'),
+  new Photo('scissors', './imgs/scissors.jpg'),
+  new Photo('shark', './imgs/shark.jpg'),
+  new Photo('sweep', './imgs/sweep.png'),
+  new Photo('tauntaun', './imgs/tauntaun.jpg'),
+  new Photo('unicorn', './imgs/unicorn.jpg'),
+  new Photo('usb', './imgs/bag.gif'),
+  new Photo('water-can', './imgs/water-can.jpg'),
+  new Photo('wine-glass', './imgs/wine-glass.jpg'),
+
+];
+
+
+
 var firstOption = document.getElementById('firstOption');
 var secondOption = document.getElementById('secondOption');
 var thirdOption = document.getElementById('thirdOption');
 
-var catalogProducts = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
+var firstImg = document.getElementById('firstImg');
 
-function voteTheseProducts(name, fileLocation, displayCount, numberClicks) {
-  this.name = name;
-  this.fileLocation = fileLocation;
-  this.displayCount = 0;
-  this.numberClicks = 0;
+var clickTicker = 0;
+
+function generateRandomIndex() {
+  var randomIndex = Math.floor(Math.random() * photos.length);
+  return randomIndex;
 }
 
-voteTheseProducts.prototype.generateRandomPhoto = function() {
-  this.name = catalogProducts[Math.floor(Math.random() * catalogProducts.length)];
-
-  this.fileLocation = '<img src="imgs/' + this.name + '" />';
-
-};
-
-var test = new voteTheseProducts();
-test.generateRandomPhoto();
+var firstRand, secondRand, thirdRand;
 
 
+function generateRandomPhoto() {
+  firstRand = generateRandomIndex();
+  console.log(firstRand);
+  secondRand = generateRandomIndex();
 
+  while(firstRand === secondRand) {
+    secondRand = generateRandomIndex();
+  }
+  thirdRand = generateRandomIndex();
 
-// function selectVotePhoto() {
-//   var randomPhoto = catalogProducts[Math.floor(Math.random() * catalogProducts.length)];
-//    return randomPhoto;
-// }
-
-// firstOption.innerHTML = '<img src="imgs/' + selectVotePhoto() + '" />';
-// secondOption.innerHTML = '<img src="imgs/' + selectVotePhoto() + '" />';
-// thirdOption.innerHTML = '<img src="imgs/' + selectVotePhoto() +'" />';
-
-var numClicks = 0;
-function clickCounter() {
+  while(thirdRand === firstRand || thirdRand === secondRand){
+    thirdRand = generateRandomIndex();
+  }
+  firstImg.src = photos[firstRand].fileLocation;
+  
 
 }
+
+generateRandomPhoto();
