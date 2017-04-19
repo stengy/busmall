@@ -28,7 +28,7 @@ var photos = [
   new Photo('sweep', './imgs/sweep.png'),
   new Photo('tauntaun', './imgs/tauntaun.jpg'),
   new Photo('unicorn', './imgs/unicorn.jpg'),
-  new Photo('usb', './imgs/bag.gif'),
+  new Photo('usb', './imgs/usb.gif'),
   new Photo('water-can', './imgs/water-can.jpg'),
   new Photo('wine-glass', './imgs/wine-glass.jpg'),
 
@@ -41,6 +41,8 @@ var secondOption = document.getElementById('secondOption');
 var thirdOption = document.getElementById('thirdOption');
 
 var firstImg = document.getElementById('firstImg');
+var secondImg = document.getElementById('secondImg');
+var thirdImg = document.getElementById('thirdImg');
 
 var clickTicker = 0;
 
@@ -66,7 +68,8 @@ function generateRandomPhoto() {
     thirdRand = generateRandomIndex();
   }
   firstImg.src = photos[firstRand].fileLocation;
-  
+  secondImg.src = photos[secondRand].fileLocation;
+  thirdImg.src = photos[thirdRand].fileLocation;
 
 }
 
