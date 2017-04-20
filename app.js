@@ -61,7 +61,6 @@ function generateRandomPhotos(){
   var nextPhoto = photos.splice(getRandomIndex(photos), 1);
   // concat the array returned by splice onto photos onScreen
   displayedPhotos = displayedPhotos.concat(nextPhoto);
-  // repeat two more times to get three images
   nextPhoto = photos.splice(getRandomIndex(photos), 1);
   displayedPhotos = displayedPhotos.concat(nextPhoto);
   nextPhoto = photos.splice(getRandomIndex(photos), 1);
@@ -84,27 +83,68 @@ function handlePhotoClick(event){
 }
 
 function renderPhotoChoices(){
-  // get three new photos
+
   generateRandomPhotos();
 
 
   // re populate the app div
   var imageElement;
   for(var i=0; i < displayedPhotos.length; i++){
-    // incrament
+
     displayedPhotos[i].displayCount++;
 
-    // create the img element
+    // img element
     imageElement = document.createElement('img');
     // set its source
     imageElement.src = displayedPhotos[i].src;
-    // set an atribute for use later in the event handler
-    // that tracks which photo object in photosOnScree to
-    // incrament clicks on
     imageElement.setAttribute('photos-on-screen-index', i);
-    // add event listener
     imageElement.addEventListener('click', handlePhotoClick);
-    // render to page
     app.appendChild(imageElement);
   }
+}
+
+function renderChart(){
+  // refill photos array with the photo objects we took
+  // during generateRandomPhotos
+  photos = photos.concat(displayedPhotos);
+  photos = photos.concat(previousPhotos);
+  photos = photos.concat(secondToLastPhotos);
+
+  app.textContent = '';
+
+  var canvas = document.createElement('canvas');
+  canvas.width = app.clientWidth;
+  canvas.height = app.clientWidth;
+  app.appendChild(canvas);
+
+  var ctx = canvas.getContext('2d');
+  ctx.fillRect(0, 0, 50, 50);
+
+  // create a data object to make a chart
+  var data = {
+    labels: [],
+    datasets: [
+      {
+        label: 'click count',
+        data: [],
+      },
+      {
+        label: 'display count',
+        data: [],
+      },
+    ],
+  };
+
+  var currentPhoto;
+  for(var i=0; i< photos.length; i++){
+    currentPhoto = photos[i];
+    data.labels.push(currentPhoto.name);
+    data.datasets[0].data.push(currentPhoto.clickCount);
+    data.datasets[1].data.push(currentPhoto.displayCount);
+  }
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: data,
+  });
 }
