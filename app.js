@@ -6,8 +6,12 @@ var secondToLastPhotos = [];
 var previousPhotos = [];
 var displayedPhotos = [];
 
-photos = JSON.parse(localStorage.getItem('photos'));
 
+try {
+photos = JSON.parse(localStorage.getItem('photos'));
+} catch {
+  console.log('problem loading local storage');
+}
 if(photos === null){
 
 var photos = [
@@ -131,8 +135,8 @@ function renderChart(){
   app.textContent = '';
 
   var canvas = document.createElement('canvas');
-  canvas.width = app.clientWidth;
-  canvas.height = app.clientWidth;
+  canvas.width = 500;
+  canvas.height = 500;
   app.appendChild(canvas);
 
   var ctx = canvas.getContext('2d');
@@ -144,6 +148,29 @@ function renderChart(){
     datasets: [
       {
         label: 'click count',
+        backgroundColor:[
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+          'rgba(85, 58, 168, 0.2)',
+        ],
         data: [],
       },
       {

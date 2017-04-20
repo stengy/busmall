@@ -6,13 +6,23 @@
 }
 
 body{
-  background-color: beige;
+  background-color: #509388;
+
 
 }
 
-.photo-box{
-  height: 25%;
-  width: 25%;
-  float: left;
-  padding: 20px;
+
+#app img{
+  width: calc(100% / 4);
+  height: auto;
+  padding: 10px;
+  display: inline-block;
+
+}
+
+#app{
+  width: 500px;
+  height: auto;
+  margin: 0 auto;
+
 }
