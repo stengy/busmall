@@ -13,7 +13,7 @@ body{
 
 
 #app img{
-  width: calc(100% / 4);
+  width: calc(90% / 3);
   height: auto;
   padding: 10px;
   display: inline-block;
@@ -21,7 +21,7 @@ body{
 }
 
 #app{
-  width: 500px;
+  width: 80%;
   height: auto;
   margin: 0 auto;
 

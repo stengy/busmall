@@ -1,7 +1,7 @@
 'use strict';
 
 var app = document.getElementById('app');
-var clicksRemaining = 25;
+var clicksRemaining = 1;
 var secondToLastPhotos = [];
 var previousPhotos = [];
 var displayedPhotos = [];
@@ -9,7 +9,8 @@ var displayedPhotos = [];
 
 try {
 photos = JSON.parse(localStorage.getItem('photos'));
-} catch {
+}
+catch (error) {
   console.log('problem loading local storage');
 }
 if(photos === null){
@@ -30,14 +31,14 @@ var photos = [
   new Photo('pen', 'pen.jpg'),
   new Photo('pet-sweep', 'pet-sweep.jpg'),
   new Photo('scissors', 'scissors.jpg'),
-  new Photo('shark in the dark', 'shark.jpg'),
+  new Photo('sharks', 'shark.jpg'),
   new Photo('tauntaun', 'tauntaun.jpg'),
 
   new Photo('sweep', 'sweep.png'),
   new Photo('unicorn', 'unicorn.jpg'),
   new Photo('usb', 'usb.gif'),
-  new Photo('water-can', 'water-can.jpg'),
-  new Photo('wine-glass', 'wine-glass.jpg'),
+  new Photo('water can', 'water-can.jpg'),
+  new Photo('wine glass', 'wine-glass.jpg'),
 ];
 }
 
@@ -135,7 +136,7 @@ function renderChart(){
   app.textContent = '';
 
   var canvas = document.createElement('canvas');
-  canvas.width = 500;
+  canvas.width = app.clientWidth;
   canvas.height = 500;
   app.appendChild(canvas);
 
@@ -169,12 +170,33 @@ function renderChart(){
           'rgba(85, 58, 168, 0.2)',
           'rgba(85, 58, 168, 0.2)',
           'rgba(85, 58, 168, 0.2)',
-          'rgba(85, 58, 168, 0.2)',
         ],
         data: [],
       },
       {
         label: 'display count',
+        backgroundColor: [
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+          'rgba(27, 47, 119, 0.2)',
+        ],
         data: [],
       },
     ],
