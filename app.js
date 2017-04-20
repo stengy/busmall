@@ -148,7 +148,7 @@ function renderChart(){
     labels: [],
     datasets: [
       {
-        label: 'click count',
+        label: 'Clicks',
         backgroundColor:[
           'rgba(85, 58, 168, 0.2)',
           'rgba(85, 58, 168, 0.2)',
@@ -174,7 +174,7 @@ function renderChart(){
         data: [],
       },
       {
-        label: 'display count',
+        label: 'Displayed',
         backgroundColor: [
           'rgba(27, 47, 119, 0.2)',
           'rgba(27, 47, 119, 0.2)',
