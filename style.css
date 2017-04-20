@@ -11,6 +11,10 @@ body{
 
 }
 
+h1 {
+  text-align: center;
+  color: #553AA8;
+}
 
 #app img{
   width: calc(90% / 3);
