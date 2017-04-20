@@ -1,101 +1,110 @@
-'use strict'
+'use strict';
 
-//constructor
-
-function Photo(name, fileLocation) {
-  this.name = name;
-  this.fileLocation = fileLocation;
-  this.clickCount = 0;
-  this.displayCount = 0;
-
-}
+var app = document.getElementById('app');
+var clicksRemaining = 25;
+var secondToLastPhotos = [];
+var previousPhotos = [];
+var displayedPhotos = [];
 
 var photos = [
-  new Photo('bag', './imgs/bag.jpg'),
-  new Photo('banana', './imgs/banana.jpg'),
-  new Photo('bathroom', './imgs/bathroom.jpg'),
-  new Photo('boots', './imgs/boots.jpg'),
-  new Photo('breakfast', './imgs/breakfast.jpg'),
-  new Photo('bubblegum', './imgs/bubblegum.jpg'),
-  new Photo('chair', './imgs/chair.jpg'),
-  new Photo('cthulhu', './imgs/cthulhu.jpg'),
-  new Photo('dog-duck', './imgs/dog-duck.jpg'),
-  new Photo('dragon', './imgs/dragon.jpg'),
-  new Photo('pen', './imgs/pen.jpg'),
-  new Photo('pet-sweep', './imgs/pet-sweep.jpg'),
-  new Photo('scissors', './imgs/scissors.jpg'),
-  new Photo('shark', './imgs/shark.jpg'),
-  new Photo('sweep', './imgs/sweep.png'),
-  new Photo('tauntaun', './imgs/tauntaun.jpg'),
-  new Photo('unicorn', './imgs/unicorn.jpg'),
-  new Photo('usb', './imgs/usb.gif'),
-  new Photo('water-can', './imgs/water-can.jpg'),
-  new Photo('wine-glass', './imgs/wine-glass.jpg'),
+  new Photo('bag head', 'bag.jpg'),
+  new Photo('banana chopper', 'banana.jpg'),
+  new Photo('bathroom party', 'bathroom.jpg'),
+  new Photo('rain boots', 'boots.jpg'),
+  new Photo('breakfast', 'breakfast.jpg'),
 
+  new Photo('bubblegum', 'bubblegum.jpg'),
+  new Photo('chair', 'chair.jpg'),
+  new Photo('cthulhu', 'cthulhu.jpg'),
+  new Photo('dog-duck', 'dog-duck.jpg'),
+  new Photo('dragon', 'dragon.jpg'),
+
+  new Photo('pen', 'pen.jpg'),
+  new Photo('pet-sweep', 'pet-sweep.jpg'),
+  new Photo('scissors', 'scissors.jpg'),
+  new Photo('shark in the dark', 'shark.jpg'),
+  new Photo('tauntaun', 'tauntaun.jpg'),
+
+  new Photo('sweep', 'sweep.png'),
+  new Photo('unicorn', 'unicorn.jpg'),
+  new Photo('usb', 'usb.gif'),
+  new Photo('water-can', 'water-can.jpg'),
+  new Photo('wine-glass', 'wine-glass.jpg'),
 ];
 
 
+renderPhotoChoices();
 
-var firstOption = document.getElementById('firstOption');
-var secondOption = document.getElementById('secondOption');
-var thirdOption = document.getElementById('thirdOption');
-
-var firstImg = document.getElementById('firstImg');
-var secondImg = document.getElementById('secondImg');
-var thirdImg = document.getElementById('thirdImg');
-
-var clicksLeft = 25;
-
-firstImg.addEventListener('click', clickFirstImg);
-secondImg.addEventListener('click', clickSecondImg);
-thirdImg.addEventListener('click', clickThirdImg);
-
-
-
-function clickFirstImg() {
-  photos[firstRand].clickCount++;
-  generateRandomPhoto();
-  clicksLeft--;
-}
-
-function clickSecondImg(){
-  photos[secondRand].clickCount++;
-  generateRandomPhoto();
-  clicksLeft--;
-}
-
-function clickThirdImg(){
-  photos[thirdRand].clickCount++;
-  generateRandomPhoto();
-  clicksLeft--;
+// make a constructor for photo
+function Photo(name, filename){
+  this.name = name;
+  this.src = './imgs/' + filename;
+  this.clickCount = 0;
+  this.displayCount = 0;
 }
 
 
-function generateRandomIndex() {
-  var randomIndex = Math.floor(Math.random() * photos.length);
-  return randomIndex;
+
+function getRandomIndex(list) {
+  return Math.floor(Math.random() * list.length);
 }
 
-var firstRand, secondRand, thirdRand;
+// get three random photos
+function generateRandomPhotos(){
+  photos = photos.concat(secondToLastPhotos);
+  secondToLastPhotos = previousPhotos;
+  previousPhotos = displayedPhotos;
+  displayedPhotos = [];
+
+  // create a var nextPhoto to keep track of the next Photo we take out of photos
+  // splice out an photo object (wich removes it from photos)
+  var nextPhoto = photos.splice(getRandomIndex(photos), 1);
+  // concat the array returned by splice onto photos onScreen
+  displayedPhotos = displayedPhotos.concat(nextPhoto);
+  // repeat two more times to get three images
+  nextPhoto = photos.splice(getRandomIndex(photos), 1);
+  displayedPhotos = displayedPhotos.concat(nextPhoto);
+  nextPhoto = photos.splice(getRandomIndex(photos), 1);
+  displayedPhotos = displayedPhotos.concat(nextPhoto);
+}
 
 
-function generateRandomPhoto() {
-  firstRand = generateRandomIndex();
-  console.log(firstRand);
-  secondRand = generateRandomIndex();
+function handlePhotoClick(event){
+  var image = event.target;
+  var displayedPhotosIndex = image.getAttribute('photos-on-screen-index');
+  displayedPhotos[displayedPhotosIndex].clickCount++;
 
-  while(firstRand === secondRand) {
-    secondRand = generateRandomIndex();
+  clicksRemaining--;
+  if (clicksRemaining > 0){
+    renderPhotoChoices();
+  } else {
+    app.textContent = '';
+    clearAndDisplay();
   }
-  thirdRand = generateRandomIndex();
-
-  while(thirdRand === firstRand || thirdRand === secondRand){
-    thirdRand = generateRandomIndex();
-  }
-  firstImg.src = photos[firstRand].fileLocation;
-  secondImg.src = photos[secondRand].fileLocation;
-  thirdImg.src = photos[thirdRand].fileLocation;
-
 }
 
-generateRandomPhoto();
+function renderPhotoChoices(){
+  // get three new photos
+  generateRandomPhotos();
+
+
+  // re populate the app div
+  var imageElement;
+  for(var i=0; i < displayedPhotos.length; i++){
+    // incrament
+    displayedPhotos[i].displayCount++;
+
+    // create the img element
+    imageElement = document.createElement('img');
+    // set its source
+    imageElement.src = displayedPhotos[i].src;
+    // set an atribute for use later in the event handler
+    // that tracks which photo object in photosOnScree to
+    // incrament clicks on
+    imageElement.setAttribute('photos-on-screen-index', i);
+    // add event listener
+    imageElement.addEventListener('click', handlePhotoClick);
+    // render to page
+    app.appendChild(imageElement);
+  }
+}
