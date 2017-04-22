@@ -92,7 +92,13 @@ function handlePhotoClick(event){
     renderPhotoChoices();
   } else {
     renderChart();
-    localStorage.setItem ('photos', JSON.stringify(photos));
+    try {
+      localStorage.setItem ('photos', JSON.stringify(photos));
+    }
+    catch (error) {
+      consol.log('problem with localStorage during chart render');
+    }
+
 
   }
 }
@@ -148,7 +154,7 @@ function renderChart(){
     labels: [],
     datasets: [
       {
-        label: 'Clicks',
+        label: 'Votes',
         backgroundColor:[
           'rgba(85, 58, 168, 0.2)',
           'rgba(85, 58, 168, 0.2)',
