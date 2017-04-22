@@ -96,7 +96,7 @@ function handlePhotoClick(event){
       localStorage.setItem ('photos', JSON.stringify(photos));
     }
     catch (error) {
-      consol.log('problem with localStorage during chart render');
+      console.log('problem with localStorage during chart render');
     }
 
 
