@@ -1,7 +1,7 @@
 'use strict';
 
 var app = document.getElementById('app');
-var clicksRemaining = 1;
+var clicksRemaining = 25;
 var secondToLastPhotos = [];
 var previousPhotos = [];
 var displayedPhotos = [];
