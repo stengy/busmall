@@ -79,14 +79,14 @@ function handlePhotoClick(event){
     renderPhotoChoices();
   } else {
     app.textContent = '';
-    clearAndDisplay();
+
   }
 }
 
 function renderPhotoChoices(){
   // get three new photos
   generateRandomPhotos();
-
+  app.textContent = '';
 
   // re populate the app div
   var imageElement;
