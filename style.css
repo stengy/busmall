@@ -20,17 +20,23 @@ p{
   width: 40%;
   margin: 0 auto;
   margin-top: 25px;
-  margin-bottom: 50px;
+  margin-bottom: 150px;
   text-align: center;
+  font-size: 30px;
 
 }
 
+
+
 #app img{
-  width: calc(90% / 3);
-  height: auto;
+  width: 250px;
+  height: 250px;
   padding: 10px;
   display: inline-block;
-  border-radius: 10%;
+  border-radius: 25%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  margin-left: 180px;
 
 }
 
