@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: beige;
+}
+
+#app img{
+  width: calc(90% / 3);
+  height: auto;
+  padding: 10px;
+  border-radius: 25%;
+  display: inline-block;
+}
+
+#app{
+  width: 800px;
+  height: auto;
+  margin: 0 auto;
+}
