@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  width: 100%;
   box-sizing: border-box;
 }
 
@@ -11,12 +10,20 @@ html, body {
 }
 
 #app img{
-  width: calc(100% / 4);
+  width: calc(90% / 3);
   height: auto;
   padding: 10px;
-
+  border-radius: 25%;
+  display: inline-block;
 }
 
-#app {
+#app{
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+}
 
+#canvas{
+  height: 20%;
+  width: auto;
 }

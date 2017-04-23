@@ -77,15 +77,15 @@ function handlePhotoClick(event){
   if (clicksRemaining > 0){
     renderPhotoChoices();
   } else {
-    app.textContent = '';
-    clearAndDisplay();
+    renderChart();
+
   }
 }
 
 function renderPhotoChoices(){
 
   generateRandomPhotos();
-
+  app.textContent = '';
 
   // re populate the app div
   var imageElement;
