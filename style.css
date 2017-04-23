@@ -1,0 +1,48 @@
+*{
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #AED4DA;
+
+
+}
+
+h1 {
+  text-align: center;
+  color: #553AA8;
+}
+
+p{
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 150px;
+  text-align: center;
+  font-size: 30px;
+
+}
+
+
+
+#app img{
+  width: 250px;
+  height: 250px;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 25%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  margin-left: 180px;
+
+}
+
+#app{
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+
+}
